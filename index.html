@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PIKIMOV &#9734; Free online motion design and video editor</title>
+    <meta name="keywords" content="motion design video editing pikimov" >
+    <meta name="description" content="Pikimov is a free online motion design and video editor">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <meta name="google" value="notranslate">
+    
+    <meta property="og:image" content="https://pikimov.com/pikimov-cover.png" >
+    <meta property="og:image:secure_url" content="https://pikimov.com/pikimov-cover.png" >
+    <meta property="og:image:type" content="image/png" >
+    <meta property="og:image:width" content="1270" >
+    <meta property="og:image:height" content="760" >
+    <meta property="og:type" content="website" >
+    <meta property="og:title" content="Pikimov" >
+    <meta property="og:description" content="Pikimov is a free web-based motion design editor" >
+    <meta property="og:site_name" content="Pikimov" >
+    <meta property="og:url" content="https://pikimov.com/" >
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@pikilipita">
+    <meta name="twitter:creator" content="@pikilipita">
+    <meta name="twitter:title" content="Pikimov | free web-based motion design editor">
+    <meta name="twitter:description" content="Pikimov is a free web-based motion design editor">
+    <meta name="twitter:image" content="https://pikimov.com/pikimov-cover.png">
+    <meta name="twitter:image:src" content="https://pikimov.com/pikimov-cover.png">
+    <meta name="pikimov/config/environment" content="https://pikimov.com/%7B%22modulePrefix%22%3A%22pikimov%22%2C%22environment%22%3A%22production%22%2C%22rootURL%22%3A%22%2Fapp%2F%22%2C%22locationType%22%3A%22history%22%2C%22EmberENV%22%3A%7B%22EXTEND_PROTOTYPES%22%3Atrue%2C%22FEATURES%22%3A%7B%7D%2C%22_APPLICATION_TEMPLATE_WRAPPER%22%3Afalse%2C%22_DEFAULT_ASYNC_OBSERVERS%22%3Atrue%2C%22_JQUERY_INTEGRATION%22%3Afalse%2C%22_NO_IMPLICIT_ROUTE_MODEL%22%3Atrue%2C%22_TEMPLATE_ONLY_GLIMMER_COMPONENTS%22%3Atrue%7D%2C%22APP%22%3A%7B%22name%22%3A%22pikimov%22%2C%22version%22%3A%225.0.0%2B4a7a4ec0%22%7D%7D" />
+    <link rel="stylesheet" type="text/css" href="https://pikimov.com/fonts/inter/stylesheet.css">
+   <!-- <link rel="stylesheet" type="text/css" href="/fonts/abel/stylesheet.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://pikimov.com/fonts/jost/stylesheet.css">
+    <link href='boxicons/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="https://pikimov.com/fonts/fa/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://pikimov.com/app/assets/vendor.css">
+    <link rel="stylesheet" href="https://pikimov.com/app/assets/pikimov.css">
+    <style>
+      #intro{
+            position:fixed;
+            inset:0;
+            background:#161616;
+            z-index:102;/* on top of loading + header buttons*/
+        }
+        #intro .redFull{
+            background:#e60000;
+            position: absolute;
+            top:0;
+            left:0;
+            bottom:0;
+            right:100%;
+            font-size: 0;
+            transition: all .6s;
+        }
+        #intro .logo-wrapper{
+            transform: translate(-50%, -50%);
+            position: absolute;
+            top:50%;
+            left:50%;
+            transition: all .6s;
+            font-size: 0;
+            text-align: center;
+        }
+        #intro .redLogo{
+            background:#e60000;
+            position: absolute;
+            inset:0;
+            font-size: 0;
+            opacity:0;
+        }
+     
+        #intro .logo{
+            display: block;
+            width:300px;
+            filter: invert(.915);
+            transition: all .2s;
+        }
+        #intro .v{
+            position: absolute;
+            width: 265px;
+            left: 140px;/*300px;*/
+            top: 60px;/*-120px;*/
+            display:none;
+            opacity:0;
+            transition: all .6s;
+            transform:translateX(-50%);
+            filter: drop-shadow(20px 3px 4px #161616);
+        }
+        #intro .heart{
+            position: absolute;
+            width: 50px;
+            left: 230px;
+            top: 10px;
+            transform: rotate(-9deg);
+            visibility: hidden;
+            transition: all .5s;
+        }
+        #intro .since2024{
+            transform: translate(-50%, -50%);
+            position: absolute;
+            left:50%;
+            width:250px;
+            top:calc(50% + 70px);
+            transition: all .6s;
+            opacity:0;
+            filter: drop-shadow(0 0 6px #161616) drop-shadow(0 0 3px #161616);
+        }
+/*
+        #intro .v{
+            position: absolute;
+            width: 265px;
+            left: 300px;
+            top: -120px;
+            display:none;
+            opacity:0;
+            transition: all .6s;
+        }
+        #intro .since2024{
+            transform: translate(-50%, -50%);
+            position: absolute;
+            top:50%;
+            left:50%;
+            width:250px;
+            top:calc(50% + 70px);
+            transition: all .6s;
+            opacity:0;
+        }
+*/
+        #intro.fadeOutIntro{
+            animation:fadeOutIntro 1s forwards;
+        }
+        #intro .logo.fadeOutIntro{
+            animation:fadeOutIntro 1s forwards;
+        }
+        @keyframes fadeOutIntro {
+        0% {opacity:1; visibility: visible;}
+        100% { opacity:0; visibility: hidden;}
+        }
+                /* beta 1*/
+        #intro img{
+            width:260px;
+        }
+        #intro p{
+          font-size: 18px;
+          margin:10px 0;
+          color:#a0a0a0;
+        }
+    </style>
+    <script>
+        const _config = {
+    "useViewOffset": true,
+    "features": {
+        "comp3D": true,
+        "repeat": true,
+        "snapping": true,
+        "copyEffect": true,
+        "expressions": true,
+        "freeShape": true,
+      "graphEditor": true,
+        "lineItem": true,
+        "textStroke": true,
+        "textBackground": true,
+        "copyTextStyle": true
+    },
+    "sentry": true,
+    "maxCompositions": 50,
+    "maxLibraryItems": 100,
+    "compositions": {
+        "maxResolution": {
+            "width": 3840,
+            "height": 2160
+        },
+        "maxFPS": 60,
+        "maxItems": 100,
+        "maxDuration": 1800
+    },
+    "videos": {
+        "maxResolution": {
+            "width": 3840,
+            "height": 2160
+        },
+        "maxFPS": 60,
+        "lowHD": true
+    },
+    "appFolder": "\/app\/",
+    "dracoPath": "\/app\/js\/libs\/draco\/",
+    "basisPath": "\/app\/js\/libs\/basis\/",
+    "premultiplyAlpha": false,
+    "precompose": true,
+    "wvl": "worker-video-library.min.js",
+    "wvm": "worker-video-manager-2026-02.min.js"
+};
+        var _cDotData = null;
+        var _isNewProject = true;
+        var _demoProjectName = null;
+        var _exportedVideo = null;
+        var _exportedSequence = null;
+        var _nbContexts = 0;
+        var _usage = {};
+        var _subRenderers = [];
+        var _videoCacheConfig = {
+            nbFramesToCheck: 20,
+            requestMargin: 50,
+            maxQueueSize: 20
+        };
+    </script>
+    <script src="https://pikimov.com/js/browser-detection.min.js"></script>
+    <!-- used in remove bg -->
+    <script src="https://pikimov.com/js/libs/mp4-muxer.511.min.js"></script>
+    <!-- used in export -->
+    <script src="https://pikimov.com/js/libs/mediabunny.1.28.0.min.js"></script>
+    
+    <script src="https://pikimov.com/js/libs/jquery-3.7.1.min.js"></script>
+    <script src="https://pikimov.com/js/libs/interact.min.js"></script>
+    <script src="https://pikimov.com/js/libs/Sortable.min.js"></script>
+    <script src="https://pikimov.com/js/libs/opentype.min.js"></script><!-- 2024 11 12 v 1.3.4-->
+    
+    <script type="module" src="js/libs/3-182-1-pikimov.js"></script>
+    <script src="wasm/expressions.js"></script>
+    </head>
+<body>
+    <!-- GA 4 -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-11ZEV31K6C"></script>
+<script>
+    var _doGA = true;
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('set', 'page_title', 'pikimov | app');
+    gtag('config', 'G-11ZEV31K6C');
+</script>
+    <script src="https://pikimov.com/app/assets/vendor.js"></script>
+    <script src="https://pikimov.com/app/assets/ember-auto-import.app.js"></script>
+    <script src="https://pikimov.com/app/assets/pikimov.js"></script>
+    <div id="intro">
+      
+      <div class="redFull"></div>
+        <div class="logo-wrapper">
+            <img src="https:/pikimov.com/images/intro/ukrainian-heart.svg" class="heart" draggable="false">
+            <div class="redLogo"></div>
+            <img src="https:/pikimov.com/images/intro/pikimov-logo-letters.svg" class="logo" alt="pikimov logo" draggable="false">
+            <img src="https:/pikimov.com/images/intro/v5.png" class="v" alt="V5" draggable="false">
+        </div>
+        
+        <img src="/images/intro/since2024-v5.png" alt="since 2024" class="since2024" draggable="false">
+    </div>
+    <div id="splashScreen">
+      <div class="bg"></div>
+      <div class="dimmer"></div>
+      <div class="content">
+        <div class="splashGrid">
+          
+          <div class="left">
+            <header>
+                <h1>
+                    <a href="https://pikimov.com"><img src="images/logo-pikimov.png" alt="pikimov logo" class="logo"></a>
+                    <span class="r">v5</span>
+                </h1>
+                <h2>Free motion design and video editor</h2>
+            </header>
+            <div class="selector">
+                <h3 class="active">Demo projects</h3>
+                <h3>Tutorials</h3>
+            </div>
+            
+<div class="demos">
+    <h3>Classic video editing</h3>
+    <h3>Motion design and compositing</h3>
+    <ul class="scrollbar">
+        <li data-demoname="road movie">
+            <video src="demos-covers/road-movie.webm" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Road movie</span>
+        </li>
+        <li data-demoname="introducing v5">
+            <video src="demos-covers/introducing-v5.webm" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Introducing v5</span>
+        </li>
+        <li data-demoname="short story">
+            <video src="demos-covers/short-story.webm" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Short story</span>
+        </li>
+        <li data-demoname="blend modes classic">
+            <video src="demos-covers/blend-modes-classic.webm" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Blend modes classic</span>
+        </li>
+    </ul>
+    <ul class="scrollbar">
+        <li data-demoname="gallery transitions">
+            <video src="demos-covers/gallery-transitions.webm" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Gallery transitions</span>
+        </li>
+        <li data-demoname="phone reveal teaser">
+            <video src="demos-covers/phone-teaser.webm" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Phone reveal teaser</span>
+            <span class="is3D">3D</span>
+        </li>
+        <li data-demoname="speed ramping">
+            <video src="demos-covers/speed-ramping.mp4" muted autoplay playsinline loop disablepictureinpicture></video>
+            <p class="name">Speed ramping</p>
+        </li>
+        <li data-demoname="space noise">
+            <video src="demos-covers/space-noise.webm" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Space noise</span>
+        </li>
+        <li data-demoname="pikimov logo reveals">
+            <video src="demos-covers/pikimov-logo-reveals.webm" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Pikimov logo reveals</span>
+        </li>
+        <li data-demoname="true detective">
+            <video src="demos-covers/true-detective.mp4" muted autoplay playsinline loop disablepictureinpicture></video>
+            <p class="name">True detective</p>
+        </li>
+        <li data-demoname="mini mountain">
+            <video src="demos-covers/mini-mountain.mp4" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Mini mountain</span>
+            <span class="is3D">3D</span>
+        </li>
+        <li data-demoname="swing">
+            <video src="demos-covers/swing.webm" muted autoplay playsinline loop disablepictureinpicture></video>
+            <p class="name">Swing</p>
+        </li>
+        <li data-demoname="typewriter">
+            <video src="demos-covers/typewriter.mp4" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Typewriter effect</span>
+        </li>
+        <li data-demoname="pictures wall">
+            <video src="demos-covers/pictures wall.mp4" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Pictures wall</span>
+            <span class="is3D">3D</span>
+        </li>
+        <li data-demoname="3D model">
+            <video src="demos-covers/3D-model.webm" muted autoplay playsinline loop disablepictureinpicture></video>
+            <p class="name">3D model</p>
+        </li>
+        <li data-demoname="silent ash">
+            <video src="demos-covers/silent-ash.mp4" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">Silent Ash</span>
+            <span class="is3D">3D</span>
+        </li>
+        <li data-demoname="the workshop">
+            <video src="demos-covers/the-workshop.mp4" muted autoplay playsinline loop disablepictureinpicture></video>
+            <span class="name">The workshop</span>
+            <span class="is3D">3D</span>
+        </li>
+        <li data-demoname="little circus">
+            <video src="demos-covers/little-circus.mp4" muted autoplay playsinline loop disablepictureinpicture></video>
+            <p class="name">little circus</p>
+        </li>
+        <li data-demoname="chapter-one">
+            <video src="demos-covers/chapter-one.mp4" muted autoplay playsinline loop disablepictureinpicture></video>
+            <p class="name">masking</p>
+        </li>
+        <li data-demoname="blend modes 02">
+            <video src="demos-covers/blend-modes-02.mp4" muted autoplay playsinline loop disablepictureinpicture></video>
+            <p class="name">blend modes</p>
+        </li>
+        <li data-demoname="stars">
+            <video src="demos-covers/stars.mp4" muted autoplay playsinline loop disablepictureinpicture></video>
+            <p class="name">nested compositions</p>
+        </li>
+    </ul>
+</div>
+            <div class="tutorials">
+    <div class="lists scrollbar">
+        <h3>Introduction to Pikimov</h3>
+        <ul>
+            <li>
+                <a class="oneTutorial" target="_blank" href="https://www.youtube.com/watch?v=3n8kC28s0uc">
+                    <img src="images/tutorials/thumb-tutorial-00.webp" alt="pikimov tutorial">
+                    <p>Learn animation basics</p>
+                </a>
+            </li>
+        </ul>
+        <h3>Classic editor</h3>
+        <ul>
+            <li>
+                <a class="oneTutorial" target="_blank" href="https://www.youtube.com/watch?v=QVZlCcobx9Q">
+                    <img src="images/tutorials/thumb-tutorial-classic-01.webp" alt="pikimov tutorial">
+                    <p>Learn animation basics</p>
+                </a>
+            </li>
+        </ul>
+        <h3>Compositing editor</h3>
+        <ul>
+            <li>
+                <a class="oneTutorial" target="_blank" href="https://www.youtube.com/watch?v=uoTA0VjzGsY">
+                    <img src="images/tutorials/thumb-tutorial-01.webp" alt="pikimov tutorial">
+                    <p>Learn animation basics</p>
+                </a>
+            </li>
+            <li>
+                <a class="oneTutorial" target="_blank" href="https://www.youtube.com/watch?v=mCiPnWyW7wg">
+                    <img src="images/tutorials/thumb-tutorial-02.webp" alt="pikimov tutorial">
+                    <p>Layers and compositions</p>
+                </a>
+            </li>
+            <li>
+                <a class="oneTutorial" target="_blank" href="https://www.youtube.com/watch?v=Nfs7A1unqz0">
+                    <img src="images/tutorials/thumb-tutorial-03.webp" alt="pikimov tutorial">
+                    <p>Blend modes</p>
+                </a>
+            </li>
+            <li>
+                <a class="oneTutorial" target="_blank" href="https://www.youtube.com/watch?v=Db7NDiFrnzk">         
+                    <img src="images/tutorials/thumb-tutorial-04.png" alt="pikimov tutorial">
+                    <p>Group parenting</p>
+                    </a>    
+            </li>
+            <li>
+                <a class="oneTutorial" target="_blank" href="https://www.youtube.com/watch?v=2J2xXWqfv8M">         
+                <img src="images/tutorials/thumb-tutorial-05.png" alt="pikimov tutorial">
+                <p>Masking</p>
+                </a>    
+            </li>
+            <li>
+                <a class="oneTutorial" target="_blank" href="https://www.youtube.com/watch?v=c6k0TwJTIh0">         
+                <img src="images/tutorials/thumb-tutorial-06.png" alt="pikimov tutorial">
+                <p>3D compositions</p>
+                </a>    
+            </li>
+            <li>
+                <a class="oneTutorial" target="_blank" href="https://www.youtube.com/watch?v=5MZBb2XHSCs">         
+                <img src="images/tutorials/thumb-tutorial-07.png" alt="pikimov tutorial">
+                <p>Motion tracking</p>
+                </a>    
+            </li>
+            <li>
+                <a class="oneTutorial" target="_blank" href="https://www.youtube.com/watch?v=DYkW6NIa8Pg">         
+                <img src="images/tutorials/thumb-tutorial-08.webp" alt="pikimov tutorial 08">
+                <p>Free shapes and rotoscoping</p>
+                </a> 
+            </li>
+            <li>
+                <a class="oneTutorial" target="_blank" href="https://www.youtube.com/watch?v=Q8xWGDeNipE">         
+                <img src="images/tutorials/thumb-tutorial-09.webp" alt="pikimov tutorial 09">
+                <p>Graph editor</p>
+                </a> 
+            </li>
+        </ul>
+    </div>
+    <div class="german">
+        <h3>More tutorials</h3>
+        <a class="button pikimovGerman" href="https://www.youtube.com/@PikimovGerman" target="_blank"><img src="https://pikimov.com/images/flag-de.svg" alt="de">German tutorials</a>
+    </div>
+</div>          
+            <div class="buttons">
+                <span id="b_newProject" class="button">new project</span>
+                <span id="b_openProject" class="button">open project</span>
+                                <p>Projects are processed locally on your computer, <br>your files are not uploaded on a server</p>
+            </div>
+          </div><!-- /left -->
+           <div class="right">
+              <div class="whatsNew">
+                <h3>What's new</h3>
+                <div class="changelog scrollbar">
+                  <h4>2025/03/20</h4>
+<ul>
+  <li>Added buttons to copy/paste text styles</li>
+  <li>Added mirror modes to the motion tile FX</li>
+</ul>
+<h4>2025/03/17</h4>
+<ul>
+  <li>Added color property to the shadow FX</li>
+  <li>Added threshold property to the chroma key FX</li>
+  <li>Bug fix: load image sequence</li>
+  <li>Bug fix: export composition frame</li>
+</ul>
+<h4>2025/03/04</h4>
+<ul>
+  <li><strong style="font-size:14px;">💾 Pikimov 5.1.0 offline app</strong></li>
+  <li>Pikimov is now available as an offline app for Patreon supporters, more infos on <a href="https://www.patreon.com/posts/pikimov-offline-152224666" target="_blank">Patreon</a></li>
+</ul>
+<h4>2026/02/24</h4>
+<ul>
+    <li>Add background to texts, like in CapCut</li>
+    <li>New FX: Wiggle</li>
+</ul>
+<h4>2026/02/04 - V5 🦄🦄🦄🦄🦄</h4>
+<ul>
+    <li>👑 New classic video editor (like CapCut)</li>
+    <li>📈 Graph editor: fine tune animated properties easings</li>
+    <li>〰️ New line item</li>
+    <li>👑 New FX: motion blur</li>
+    <li>New FX: extrude</li>
+    <li>New FX: vintage colors</li>
+    <li>new blend modes: brighten, darken</li>
+    <li>The max composition duration is now 30 minutes</li>
+    <li>New tools: slip edit, duplicate into</li>
+    <li>Added text Stroke</li>
+    <li>Support for arabic text</li>
+    <li>Export as a .webm video with transparency</li>
+    <li>Added support for importing .webm video with transparency</li>
+    <li>Added quality settings when exporting</li>
+    <li>Workspace layout now saved per composition</li>
+    <li>Add personal notes to projects</li>
+    <li>Improved video cache system</li>
+    <li>Color picker live updates</li>
+    <li>MORE speed: <br>editing and exporting 2D compositions is up to 20% faster</li>
+    <li>LESS memory: <br>Pikimov needs less RAM while editing and exporting</li>
+</ul>
+<h4>2025/08/14 - V4 🦊🦊🦊🦊</h4>
+<ul>
+    <li>editable vector shapes</li>
+    <li>rotoscoping</li>
+    <li>javascript expression engine</li>
+    <li>4K 60fps import / export</li>
+    <li>timeline items snapping</li>
+    <li>timeline items loop</li>
+    <li>added support for .webm and .mov files</li>
+    <li>added support for .woff font files</li>
+    <li>disc / elipse radial gradient</li>
+    <li>new FX: fluted glass</li>
+    <li>new FX: kaleidoscope</li>
+    <li>new FX: petzval lens</li>
+    <li>new FX: crop edges</li>
+    <li>copy and paste effects between items</li>
+    <li>added Opera support (Windows and macOS)</li>
+    <li>3D compositions: right click on the editor to set the view</li>
+    
+    <li>right click on an item: 'duplicate into...'</li>
+    <li>right click on the composition: 'save frame as .png'</li>
+    <li>faster video export</li>
+    <li>higher quality video export</li>
+</ul>
+<h4>2025/04/08 - V3 😺😺😺</h4>
+<ul>
+    <li>new tool: ⭐️ background remover ⭐️</li>
+    <li>new tool: ⭐️ subtitles generation ⭐️</li>
+    <li>new FX: noise</li>
+    <li>new FX: shake</li>
+    <li>new FX: leave color</li>
+    <li>new FX: wave warp</li>
+    <li>new FX: mosaic</li>
+    <li>new FX: chromatic aberration</li>
+    <li>new FX: turbulent displace</li>
+    
+    <li>vertical/horizontal workspaces</li>
+    <li>composition time markers</li>
+    <!--<li>opacity / volume hint curve</li>-->
+    
+    <li>New blend mode: overlay</li>
+    <li>Added luminance mask</li>
+    <li>Added support for .ogg files</li>
+    <li>added support for .tga files</li>
+    <li>added support for .glb kt2x textures</li>
+    
+    <li>new: <a class="discord" href="https://discord.gg/DhNcC7GQn7" target="_blank" style="text-decoration: underline;">Pikimov Discord server</a></li>
+    <li>improved performances and memory usage</li>
+</ul>
+<!--
+<h4>2025/03/20</h4>
+<ul>
+  <li>Audio solume can be set up to 200%</li>
+  <li>new: <a class="discord" href="https://discord.gg/DhNcC7GQn7" target="_blank">Pikimov Discord server</a></li>
+  <li>Some performance improvements</li>
+</ul>
+<h4>2025/03/13</h4>
+<ul>
+  <li>New blend mode: overlay</li>
+  <li>new FX: mosaic</li>
+  <li>new demo project: Phone reveal teaser</li>
+</ul>
+<h4>2025/03/07</h4>
+<ul>
+  <li>added support for .glb kt2x textures</li>
+  <li>new demo project: Gallery transitions</li>
+</ul>
+<h4>2025/02/25</h4>
+<ul>
+  <li>improved performances and memory usage</li>
+</ul>
+<h4>2025/02/19</h4>
+<ul>
+  <li>new FX: chromatic aberration</li>
+  <li>new FX: turbulent displace</li>
+  <li>Added support for .ogg audio files</li>
+</ul>
+<h4>2025/01/23</h4>
+<ul>
+    <li>Fixed an issue that could cause the app to freeze at the end of export</li>
+    <li>Added luminance mask</li>
+    <li>Updated motion tracking tool</li>
+</ul>
+-->
+<h4>2025/01/08 - V2</h4>
+<ul>
+    <li>4K resolution support ⭐️ ⭐️ ⭐️</li>
+    <li>images export with alpha channel</li>
+    <li>edit anchor point position</li>
+    <li>new FX: motion tile</li>
+    <li>new FX: corner pin</li>
+    <li>new FX: typewriter</li>
+    <li>new FX: bend</li>
+    <li>new FX: skew</li>
+    <li>new FX: vignette</li>
+    <li>shadow FX: added blur</li>
+    <li>New blend mode: difference</li>
+    <li>Text tool: fixed width + justify</li>
+    <li>Rectangle item: 4 colors gradients</li>
+    <li>performances improvements</li>
+</ul>
+<h4>2024/10/10 - Version 1.0 🍸</h4>
+<ul>
+  <li>3D compositions ⭐️ ⭐️ ⭐️</li>
+  <li>Advanced lights management</li>
+  <li>New projects demos</li>
+</ul>
+<h4>2024/09/30</h4>
+<ul>
+  <li>It's now possible to insert a group into another group</li>
+  <li>New project demo: Speed ramping</li>
+</ul>
+<h4>2024/09/02</h4>
+<ul>
+  <li>new tool: motion tracking</li>
+</ul>
+                </div>
+              </div>
+              <div class="support">
+                <h3>Support Pikimov on Patreon</h3>
+                <div class="patreon">
+                    <h4 style="text-decoration:line-through;">Reach $100</h4>
+                    <p style="text-decoration:line-through;">Animation graph editor</p>
+                    <h4>Reach $200</h4>
+                    <p>Particles generator</p>
+                </div>
+                <p>
+                    Get the <strong>standalone app</strong> version as a reward.
+                    <br>
+                    <a href="https://www.patreon.com/pikilipita" target="_blank">More infos</a>
+                </p>
+              </div>
+          </div><!-- /right -->
+          
+        </div><!-- /splashGrid -->
+      </div><!-- /content -->
+      
+      <footer>
+            <div>
+                <p class="social">
+                    <a href="https://twitter.com/pikilipita" target="_blank"><img src="images/social/icon-twitter.svg" alt="twitter"></a>
+                    <a class="x" href="https://twitter.com/pikilipita" target="_blank"><img src="images/social/icon-x.svg" alt="x"></a>
+                  <a class="x" href="https://twitter.com/pikilipita" target="_blank"><img src="images/social/icon-render.svg" alt="x"></a>
+                  <a class="x" href="https://twitter.com/pikilipita" target="_blank"><img src="images/social/icon-websim.svg" alt="x"></a>
+                  
+                <div class="documentation">
+                    <a href="https://docs.pikimov.com" target="_blank">Documentation</a>
+                </div>
+                <div class="contact">
+                    Contact: pikilipita@pikilipita.com
+                </div>
+                <div class="madeWith">
+                    Made with <span>★</span> Ember.js <span>★</span> Three.js
+                </div>
+            </div>
+            <span class="version"></span>
+        </footer>
+    </div><!-- /splash screen -->
+</body>
+</html>
